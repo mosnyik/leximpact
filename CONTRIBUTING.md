@@ -22,6 +22,44 @@ Clone your fork repository to your local machine:
 git clone https://github.com/your-username/leximpact.git
 cd leximpact
 ```
+
+### 3. Install Dependencies
+After cloning, install the project's dependencies:
+
+```bash
+# Using npm
+npm install
+```
+### Setup Environment Varables
+
+Create a `.env.local` file in the root of the project
+Copy the enviromnemt variables from `.env.example` from the clone project into the `.env.local` you just created
+
+```bash
+cp .env.example .env.local
+```
+
+You can get the requested variable from the WhatsApp group
+
+### Running the Project Locally
+
+Start the development server:
+```bash
+npm run dev
+```
+The app should be runnig on 
+
+```bash
+http://localhost:3000
+```
+### Running lint and test
+
+```bash
+npm run lint
+
+npm run test
+
+```
 ### Branching Strategy
 We use a simple Git flow:
 - `main` - Stable branch (Production ready code)
@@ -56,7 +94,7 @@ We use a simple Git flow:
 - `tests` - Specific to test files 
   > **❗** Scope should match logical parts of the app — not physical folders.
 
-### 3. Create a `dev` branch on your fork (if you do not have already)
+### 4. Create a `dev` branch on your fork (if you do not have already)
 
 ```bash
 git checkout -b dev
@@ -65,7 +103,7 @@ git push origin dev
 
 ```
 
-### 4. Create a Feature Branch From Your Fork's `dev`
+### 5. Create a Feature Branch From Your Fork's `dev`
 
 ```bash
 git checkout dev
@@ -97,7 +135,6 @@ chore(deps): update package dependencies
 
  Before pushing, make sure your code is clean:
  ```bash
- # using npm
 npm run lint
 npm run test
 npm run build
