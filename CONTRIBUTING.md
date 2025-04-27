@@ -145,6 +145,8 @@ npm run build
  Push your feature branch to your fork:
 
  ```bash
+ git add .
+ git commit -m "feat(auth): add login UI"
  git push origin feature/[short-description]
  ```
 
