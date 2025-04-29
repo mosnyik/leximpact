@@ -1,11 +1,6 @@
-import DeployButton from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import React from "react";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import Link from "next/link";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -14,8 +9,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Lex Impact| Home",
+  description: "Building the future of AI in Africa",
 };
 
 const geistSans = Geist({
@@ -37,7 +32,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center">
+          {/* I left the themeprovider for easy theme integration,
+          You can modify it to make work fast, but if you prefer, 
+          just remove it and do it your way */}
+          <main>{children}</main>
+
+          {/* <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
@@ -69,7 +69,7 @@ export default function RootLayout({
                 <ThemeSwitcher />
               </footer>
             </div>
-          </main>
+          </main> */}
         </ThemeProvider>
       </body>
     </html>
