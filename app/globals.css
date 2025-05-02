@@ -10,7 +10,7 @@
    --hero-mild: #E2F5F9E5; */
 @layer base {
   :root {
-    --hero-strong: 190 68% 86% ;
+    --hero-strong: 190 68% 86%;
     --hero-mild: 190 66% 93%;
     --background: 0 0% 100%;
     --foreground: 0 0% 4%;
@@ -73,5 +73,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply font-montserrat;
   }
 }
