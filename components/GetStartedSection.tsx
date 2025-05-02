@@ -1,4 +1,4 @@
-// components/GetStartedSection.tsx
+import React from "react";
 export default function GetStartedSection() {
   return (
     <section className="bg-[#043AAB] py-16 text-center font-montserrat">

@@ -1,3 +1,4 @@
+import React from "react";
 import TestimonialCard from "@/components/TestimonialCard";
 
 const testimonials = [
@@ -33,7 +34,7 @@ export default function CommunityVoicesSection() {
           Hear from our growing community of developers and organizations
         </p>
       </div>
-      <div className="flex flex-wrap justify-center gap-10">
+      <div className="flex flex-wrap justify-center gap-6">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard
             key={index}

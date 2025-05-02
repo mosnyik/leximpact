@@ -1,3 +1,4 @@
+import React from "react";
 import PlatformCard from "@/components/PlatformCard";
 import { BrainCircuit, Cloud, Server } from "lucide-react"; // Optional: icons
 
