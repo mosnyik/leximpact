@@ -1,9 +1,9 @@
 # LEX IMPACT
 
-Welcome to **LEX-IMPACT** - a unified platform designed to **enpower Africans** to excel in Artificial Intelligence through **edducation, access to local data sets and compute resources**
+Welcome to **LEX IMPACT** - a unified platform designed to **enpower Africans** to excel in Artificial Intelligence through **edducation, access to local data sets and compute resources**
 
 ## Overview
-**LEX-IMPACT** brings together three critical pillars inot one seamless platform:
+**LEX IMPACT** brings together three critical pillars inot one seamless platform:
 
 - **Academy :** Learn AI from beginner to expert through curated courses, mentorship, and hands-on projects tailored African realities.
 - **Data Center :** Access rich, diverse and high quality African datasets, essential for building relevant and impactful AI models.
@@ -23,7 +23,7 @@ Our mission is to **democratise AI** across Africa by providing the tools, data,
 - Tools to explore, visualize and download datasets
 - Contribution program to expand on the datasets
 
-**Academy**
+**Compute Resources**
 - Access to GPU and CPU cloud servers
 - Free for all, but limited slots to save trained models
 - Scalable compute for model training and deployment
@@ -52,7 +52,7 @@ Our mission is to **democratise AI** across Africa by providing the tools, data,
 For guideline on how to contribute, check our [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
-
+This project is licensed under MIT License
 
 ## Get In Touch
 - email: leximpact@lexrunit.xyz
