@@ -13,6 +13,9 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Lex Impact| Home",
   description: "Building the future of AI in Africa",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 const geistSans = Geist({
