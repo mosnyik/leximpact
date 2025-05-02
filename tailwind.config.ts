@@ -18,12 +18,20 @@ const config = {
       },
     },
     extend: {
+      //     --background: #ffffff;
+      // --foreground: #0a0a0a;
+      // --primary: #021488;
+      // --hero-strong: #C5ECF4E5;
+      // --hero-mild: #E2F5F9E5;
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        heroStrong: "hsl(var(--hero-strong))",
+        heroMild: "hsl(var(--hero-mild))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -72,7 +80,30 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      // colors: {
+      //   background: "var(--background)",
+      //   foreground: "var(--foreground)",
+      //   primary: "#021488", // Custom theme color
+      //   heroStrong: "#C5ECF4E5", // hero overlay strong
+      //   heroMild: "#E2F5F9E5", // heor overlay mild
+      // },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+      },
     },
+
+    // extend: {
+    //   colors: {
+    //     background: "var(--background)",
+    //     foreground: "var(--foreground)",
+    //     primary: "#021488", // Custom theme color
+    //     heroStrong: "#C5ECF4E5", // hero overlay strong
+    //     heroMild: "#E2F5F9E5", // heor overlay mild
+    //   },
+    //   fontFamily: {
+    //     montserrat: ["Montserrat", "sans-serif"],
+    //   },
+    // },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
