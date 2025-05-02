@@ -2,6 +2,8 @@ import React from "react";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { Theme } from "@radix-ui/themes";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,7 +37,10 @@ export default function RootLayout({
           {/* I left the themeprovider for easy theme integration,
           You can modify it to make work fast, but if you prefer, 
           just remove it and do it your way */}
-          <main>{children}</main>
+          <Theme>
+            <Navbar />
+            {children}
+          </Theme>
 
           {/* <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">

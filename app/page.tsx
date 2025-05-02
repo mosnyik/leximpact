@@ -1,9 +1,15 @@
+import Hero from "@/components/hero";
+import PlatformSection from "@/components/PlatformSection";
 import React from "react";
-
 
 export default async function Home() {
   return (
     <>
+      <div>
+        <Hero />
+        <PlatformSection />
+      </div>
+
       {/* Arrange your components here
     Navbar
     main
