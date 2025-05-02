@@ -1,3 +1,4 @@
+import CommunityVoicesSection from "@/components/CommunityVoicesSection";
 import Hero from "@/components/hero";
 import PlatformSection from "@/components/PlatformSection";
 import React from "react";
@@ -8,6 +9,7 @@ export default async function Home() {
       <div>
         <Hero />
         <PlatformSection />
+        <CommunityVoicesSection />
       </div>
 
       {/* Arrange your components here

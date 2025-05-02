@@ -3,7 +3,7 @@ import { BrainCircuit, Cloud, Server } from "lucide-react"; // Optional: icons
 
 export default function PlatformSection() {
   return (
-    <section className="py-12">
+    <section className="pt-12">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold font-montserrat text-foreground">
           Our Platform
