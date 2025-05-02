@@ -27,7 +27,6 @@ cd leximpact
 After cloning, install the project's dependencies:
 
 ```bash
-# Using npm
 npm install
 ```
 ### Setup Environment Varables
