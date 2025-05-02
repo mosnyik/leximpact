@@ -2,12 +2,20 @@
   "extends": [
     "next",
     "next/core-web-vitals",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

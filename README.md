@@ -51,8 +51,16 @@ Our mission is to **democratise AI** across Africa by providing the tools, data,
 
 For guideline on how to contribute, check our [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## License
-This project is licensed under MIT License
+## Licensing
+
+LEX IMPACT uses multiple licenses across its different pillars to best protect and empower the project:
+
+| Part        | License                                                                             | Notes                                                                         |
+| ----------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Academy     | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)                     | Educational content is freely available for learning, not for commercial use. |
+| Data Centre | [Nwulite Obodo License](https://licensingafricandatasets.com/nwulite-obodo-license) | Protects African-origin datasets and ensures ethical, non-extractive use.     |
+
+> **Note**: Compute resources are offered as a **cloud service**, not as open-source code, and are therefore not licensed under an open-source or content license.
 
 ## Get In Touch
 - email: leximpact@lexrunit.xyz
