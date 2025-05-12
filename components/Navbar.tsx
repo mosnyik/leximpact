@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavbarButton from "./NavbarButton";
@@ -7,12 +7,45 @@ import { DropdownMenu, Button } from "@radix-ui/themes";
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+import { signOutAction } from "@/app/actions";
 
 const Navbar = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const signUp = () => console.log("User sign up");
+  const supabase = createClient();
+
+  const signUp = () => router.push("/sign-up");
   const logIn = () => router.push("/sign-in");
+  const handleLogout = async () => {
+    await signOutAction();
+    router.refresh();
+  };
+
+  const [user, setUser] = useState<{ name?: string; email?: string } | null>(
+    null
+  );
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data.user) {
+        const name = data.user.user_metadata?.name || data.user.email || "U";
+        setUser({ name });
+      }
+    };
+
+    getUser();
+    // Subscribe to auth changes
+    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+      getUser(); // Re-run user fetch
+    });
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, [supabase]);
   return (
     <nav className="flex justify-between items-center bg-white border-b-2 h-20 px-6 py-6 ">
       {/* Logo */}
@@ -75,91 +108,115 @@ const Navbar = () => {
         }
       </div>
       {/* Desktop Buttons */}
-      <div className="hidden space-x-3 md:flex">
-        <NavbarButton
-          bgColor="bg-white"
-          icon={
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12.5 2.5H15.8333C16.2754 2.5 16.6993 2.67559 17.0118 2.98816C17.3244 3.30072 17.5 3.72464 17.5 4.16667V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H12.5"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M8.33337 14.1666L12.5 9.99992L8.33337 5.83325"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12.5 10H2.5"
-                stroke="black"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          }
-          onClick={logIn}
-        >
-          Log In
-        </NavbarButton>
-        <NavbarButton
-          bgColor=""
-          textColor="text-white"
-          icon={
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H6C4.93913 15 3.92172 15.4214 3.17157 16.1716C2.42143 16.9217 2 17.9391 2 19V21"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M19 8V14"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M22 11H16"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          }
-          onClick={signUp}
-        >
-          Sign Up
-        </NavbarButton>
-      </div>
 
+      <div className="hidden space-x-3 md:flex">
+        {user ? (
+          <div className="relative">
+            <button
+              className="w-10 h-10 rounded-full bg-[#021488] text-white font-bold flex items-center justify-center"
+              onClick={() => setShowDropdown((prev) => !prev)}
+            >
+              {user.name?.charAt(0).toUpperCase()}
+            </button>
+
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <NavbarButton
+              bgColor="bg-white"
+              icon={
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.5 2.5H15.8333C16.2754 2.5 16.6993 2.67559 17.0118 2.98816C17.3244 3.30072 17.5 3.72464 17.5 4.16667V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H12.5"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8.33337 14.1666L12.5 9.99992L8.33337 5.83325"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12.5 10H2.5"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+              onClick={logIn}
+            >
+              Log In
+            </NavbarButton>
+            <NavbarButton
+              bgColor=""
+              textColor="text-white"
+              icon={
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H6C4.93913 15 3.92172 15.4214 3.17157 16.1716C2.42143 16.9217 2 17.9391 2 19V21"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M19 8V14"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M22 11H16"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+              onClick={signUp}
+            >
+              Sign Up
+            </NavbarButton>
+          </>
+        )}
+      </div>
       {/* Mobile Menu Toggle Button */}
       <button
         onClick={() => setMenuOpen(!menuOpen)}
@@ -213,13 +270,42 @@ const Navbar = () => {
           <Link href="/" className="hover:text-primary text-lg">
             FAQs
           </Link>
+
           <div className="space-x-3 flex flex-col justify-center items-center">
-            <NavbarButton bgColor="" textColor="text-white" onClick={signUp}>
-              Sign Up
-            </NavbarButton>
-            <NavbarButton bgColor="bg-gray" onClick={logIn}>
-              Log In
-            </NavbarButton>
+            {user ? (
+              <div className="relative">
+                <button
+                  className="w-10 h-10 rounded-full bg-[#021488] text-white font-bold flex items-center justify-center"
+                  onClick={() => setShowDropdown((prev) => !prev)}
+                >
+                  {user.name?.charAt(0).toUpperCase()}
+                </button>
+
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <NavbarButton
+                  bgColor=""
+                  textColor="text-white"
+                  onClick={signUp}
+                >
+                  Sign Up
+                </NavbarButton>
+                <NavbarButton bgColor="bg-gray" onClick={logIn}>
+                  Log In
+                </NavbarButton>
+              </>
+            )}
           </div>
         </div>
       )}

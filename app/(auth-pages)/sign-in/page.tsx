@@ -51,8 +51,10 @@ import Image from "next/image";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { MdOutlineWavingHand } from "react-icons/md";
 import { signInAction } from "@/app/actions";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,6 +82,7 @@ export default function SignInPage() {
     }
 
     await signInAction(formData);
+    router.refresh();
   };
 
   return (
@@ -159,7 +162,7 @@ export default function SignInPage() {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-full text-white text-[20px] font-bold bg-[#021488] border border-[#000000cc] shadow-md"
+              className="w-full py-3 rounded-full text-white text-[20px] font-bold bg-[#021488] border border-[#000000cc] shadow-xl shadow-black"
             >
               Log In
             </button>
